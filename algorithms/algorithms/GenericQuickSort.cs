@@ -16,25 +16,31 @@ namespace algorithms
 
         public void Sort(T[] items)
         {
+            if(items==null) throw new ArgumentNullException();
             _items = items;
             Sort(0, items.Length -1);
         }
 
         private void Sort(int startIndex, int endIndex)
         {
-            int pivotIndex = _gen.Next(startIndex, endIndex + 1);
-            PlacePivot(startIndex, endIndex, pivotIndex);
+            if (startIndex < endIndex)
+            {
+                int pivotIndex = _gen.Next(startIndex, endIndex + 1);
+                pivotIndex = PlacePivot(startIndex, endIndex, pivotIndex);
+                Sort(startIndex, pivotIndex - 1);
+                Sort(pivotIndex + 1, endIndex);
+            }
         }
 
-        private void PlacePivot( int startIndex, int endIndex, int originalPivotPos)
-        {
+        private int PlacePivot( int startIndex, int endIndex, int originalPivotPos)
+        {   
             Swap(endIndex, originalPivotPos);
 
             T pivotVal = _items[endIndex];
             int finalPivotPos = startIndex;
-            for(int i=startIndex; i <= endIndex; i++)
+            for(int i=startIndex; i < endIndex; i++)
             {
-                if(_items[finalPivotPos].CompareTo(pivotVal) < 1)
+                if(_items[i].CompareTo(pivotVal) < 1)
                 {
                     Swap(i, finalPivotPos);
                     finalPivotPos++;
@@ -42,6 +48,7 @@ namespace algorithms
                 
             }
             Swap(endIndex, finalPivotPos);
+            return finalPivotPos;
 
         }
 

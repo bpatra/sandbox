@@ -15,9 +15,40 @@ namespace algorithmsTests
         {
             var qSort = new GenericQuickSort<int>(12);
             var gen = new Random(15);
-            int N = 4000000;
-            var array1 = Enumerable.Range(0, N).Select(i => gen.Next(int.MaxValue)).ToArray();
-            qSort.Sort(array1);
+            foreach(var N in new[]{1, 3 , 4,5})
+            {
+                var array1 = Enumerable.Range(0, N).Select(i => gen.Next(int.MaxValue)).ToArray();
+                qSort.Sort(array1);
+                Assert.IsTrue(array1.IsSorted(),"#A01 " + N);
+            }
+        }
+
+        [TestMethod]
+        public void EmptySort()
+        {
+            //Test empty array
+            var qSort = new GenericQuickSort<Mock>(3);
+            qSort.Sort(new Mock[]{});
+
+            bool isSuccess = false;
+            try
+            {
+                qSort.Sort(null);
+            }
+            catch(ArgumentNullException)
+            {
+                isSuccess = true;
+            }
+            Assert.IsTrue(isSuccess, "#Argument null exception should be thrown");
+        }
+
+        class Mock : IComparable<Mock>
+        {
+
+            public int CompareTo(Mock other)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

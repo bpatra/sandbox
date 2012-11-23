@@ -45,6 +45,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="HeapSortTests.cs" />
+    <Compile Include="Helpers.cs" />
+    <Compile Include="PrintPerf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GenericQuickSortTests.cs" />
   </ItemGroup>
