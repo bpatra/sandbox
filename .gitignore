@@ -1,0 +1,10 @@
+#compiled sources
+*.dll
+*.exe
+*\bin
+*\obj
+
+#IDE and tools
+*.user
+*.suo
+*\_Resharper.*
