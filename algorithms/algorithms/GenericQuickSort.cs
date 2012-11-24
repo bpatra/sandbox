@@ -5,7 +5,7 @@ using System.Text;
 
 namespace algorithms
 {
-    public class GenericQuickSort<T> where T : IComparable<T> 
+    public class GenericQuickSort<T> : ISortable<T> where T : IComparable<T> 
     {
         Random _gen;
         T[] _items;
