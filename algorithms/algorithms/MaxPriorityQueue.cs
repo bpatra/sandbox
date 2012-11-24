@@ -70,15 +70,19 @@ namespace algorithms
             if(_heap.Length ==0) throw new ArgumentOutOfRangeException("Cannot ExtractMax in empty queue");
 
             var val = Maximum();
+
+            _items[_heap[0]] = new KeyValuePair<double, T>(double.NaN, default(T));
+
             var temp = _heap[0];
             _heap[0] = _heap[_heap.Length - 1];
             _heap[_heap.Length - 1] = temp;
 
-            _items[0]=new KeyValuePair<double, T>(double.NaN, default(T));
-
             var newHeap = new int[_heap.Length - 1];
-            Array.Copy(_heap,1 , newHeap,0, newHeap.Length);
+            Array.Copy(_heap, 0 , newHeap,0, newHeap.Length);
             _heap = newHeap;
+            
+            MaxHeapify(0,_heap.Length -1);
+
             return val;
         }
 

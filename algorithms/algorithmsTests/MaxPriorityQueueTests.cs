@@ -61,6 +61,8 @@ namespace algorithmsTests
             priorityQueue = new MaxPriorityQueue<MockJob>(new[] { new KeyValuePair<double, MockJob>(2.0, job), new KeyValuePair<double, MockJob>(1.1, job2), new KeyValuePair<double, MockJob>(2.5, job3) });
             Assert.AreEqual("hoover", priorityQueue.ExtractMax().Name, "#E4");
             Assert.AreEqual(2, priorityQueue.Count,"#E5");
+            Assert.AreEqual("cooking",priorityQueue.ExtractMax().Name,"#E6");
+            Assert.AreEqual(1, priorityQueue.Count, "#E7");
         }
     }
 }
