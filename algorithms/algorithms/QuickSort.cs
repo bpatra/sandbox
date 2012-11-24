@@ -5,11 +5,11 @@ using System.Text;
 
 namespace algorithms
 {
-    public class GenericQuickSort<T> : ISortable<T> where T : IComparable<T> 
+    public class QuickSort<T> : ISortable<T> where T : IComparable<T> 
     {
-        Random _gen;
+        readonly Random _gen;
         T[] _items;
-        public GenericQuickSort(int seed)
+        public QuickSort(int seed)
         {
             _gen = new Random(seed);
         }
