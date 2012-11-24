@@ -8,24 +8,24 @@ namespace algorithms
 
     public class NodeList<S>
     {
-        Node<S> _head;
+        Node _head;
 
-        public Node<S> Head{get {return _head;}}
+        public Node Head{get {return _head;}}
 
         public void Add(S content)
         {
-            var node = new Node<S>(content, _head);
+            var node = new Node(content, _head);
             _head = node;
         }
 
 
-        public class Node<S>
+        public class Node
         {
             S _content;
             public S Content {get {return _content;}}
-            public Node<S> Right {get {return _right;}}
-            private Node<S> _right;
-            public Node(S content, Node<S> right)
+            public Node Right {get {return _right;}}
+            private Node _right;
+            public Node(S content, Node right)
             {
                 _content = content;
                 _right = right;

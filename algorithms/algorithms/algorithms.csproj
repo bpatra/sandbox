@@ -24,6 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -89,9 +90,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericInsertionSort.cs" />
     <Compile Include="GenericQuickSort.cs" />
     <Compile Include="HeapSort.cs" />
     <Compile Include="InPlaceMergeSort.cs" />
+    <Compile Include="ISortable.cs" />
     <Compile Include="MergeSort.cs" />
     <Compile Include="NaiveHashTable.cs" />
     <Compile Include="ParallelInMergeSort.cs" />
