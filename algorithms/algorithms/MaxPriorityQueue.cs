@@ -88,7 +88,22 @@ namespace algorithms
 
         public void IncreaseKey(int index, double value)
         {
-            throw new NotImplementedException();
+            if(index >= _heap.Length) throw new IndexOutOfRangeException("Index is not valid for queue");
+
+            var oldKvP = _items[_heap[index]];
+            _items[_heap[index]] = new KeyValuePair<double, T>(value, oldKvP.Value);
+
+            int targetIndex = index;
+            int parentIndex = (targetIndex - 1)/2;
+            while(parentIndex >= 0 && _items[_heap[parentIndex]].Key < _items[_heap[targetIndex]].Key)
+            {
+                int temp = _heap[parentIndex];
+                _heap[parentIndex] = _heap[targetIndex];
+                _heap[targetIndex] = temp;
+
+                targetIndex = parentIndex;
+                parentIndex = (targetIndex - 1) / 2;
+            }
         }
     }
 

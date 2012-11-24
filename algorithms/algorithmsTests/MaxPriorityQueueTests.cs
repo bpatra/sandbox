@@ -64,5 +64,16 @@ namespace algorithmsTests
             Assert.AreEqual("cooking",priorityQueue.ExtractMax().Name,"#E6");
             Assert.AreEqual(1, priorityQueue.Count, "#E7");
         }
+
+        [TestMethod]
+        public void IncreaseKey()
+        {
+            var job = new MockJob { Name = "cooking" };
+            var job2 = new MockJob { Name = "homework" };
+            var job3 = new MockJob { Name = "hoover" };
+            var priorityQueue = new MaxPriorityQueue<MockJob>(new[] { new KeyValuePair<double, MockJob>(2.0, job), new KeyValuePair<double, MockJob>(1.1, job2), new KeyValuePair<double, MockJob>(2.5, job3) });
+            priorityQueue.IncreaseKey(1, 3.0);
+            Assert.AreEqual("homework", priorityQueue.Maximum().Name,"#E8");
+        }
     }
 }
