@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GenericHeapSort.cs" />
     <Compile Include="GenericInsertionSort.cs" />
     <Compile Include="GenericMergeSort.cs" />
     <Compile Include="GenericQuickSort.cs" />
