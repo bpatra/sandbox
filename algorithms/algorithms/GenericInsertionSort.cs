@@ -9,16 +9,16 @@ namespace algorithms
     {
         public void Sort(T[] items)
         {
-            for(int i=2; i < items.Length; i++)
+            for(int i=1; i < items.Length; i++)
             {
                 var currentVal = items[i];
                 int j = i-1;
-                while(currentVal.CompareTo(items[j]) < 1)
+                while(j >= 0 && currentVal.CompareTo(items[j]) < 1)
                 {
                     items[j + 1] = items[j];
-                    j++;
+                    j--;
                 }
-                items[j + 1] = currentVal;
+                items[++j] = currentVal;
             }
 
         }

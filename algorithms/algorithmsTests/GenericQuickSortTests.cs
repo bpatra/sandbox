@@ -41,14 +41,5 @@ namespace algorithmsTests
             }
             Assert.IsTrue(isSuccess, "#Argument null exception should be thrown");
         }
-
-        class Mock : IComparable<Mock>
-        {
-
-            public int CompareTo(Mock other)
-            {
-                throw new NotImplementedException();
-            }
-        }
     }
 }
