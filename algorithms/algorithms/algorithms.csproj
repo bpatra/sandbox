@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GenericInsertionSort.cs" />
+    <Compile Include="GenericMergeSort.cs" />
     <Compile Include="GenericQuickSort.cs" />
     <Compile Include="HeapSort.cs" />
     <Compile Include="InPlaceMergeSort.cs" />

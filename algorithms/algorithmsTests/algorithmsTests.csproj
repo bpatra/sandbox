@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GenericInsertionSortTests.cs" />
+    <Compile Include="GenericMergeSortTests.cs" />
     <Compile Include="HeapSortTests.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Mock.cs" />
