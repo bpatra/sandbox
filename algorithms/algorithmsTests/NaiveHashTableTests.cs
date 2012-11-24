@@ -20,9 +20,9 @@ namespace algorithmsTests
             const string mockAdress = "mock adress";
             const int mockAge = 51;
             const string mockName = "Zinedine Zidane";
-            var person = new Person() {Adress = mockAdress, Age = mockAge, Name = mockName};
+            var person = new MockPerson() {Adress = mockAdress, Age = mockAge, Name = mockName};
 
-            var hashTable = new NaiveHashTable<Person>();
+            var hashTable = new NaiveHashTable<MockPerson>();
             var retrievedZizou = hashTable["zizou"] = person;
             Assert.AreEqual(mockName, retrievedZizou.Name,"#Z01");
             Assert.AreEqual(mockAge, retrievedZizou.Age, "#Z02");
@@ -31,7 +31,7 @@ namespace algorithmsTests
             bool isSuccess = false;
             try
             {
-                var person2 = new Person();
+                var person2 = new MockPerson();
                 hashTable["zizou"] = person2;
             }
             catch (ArgumentException)

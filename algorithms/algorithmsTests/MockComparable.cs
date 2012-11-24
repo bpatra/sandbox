@@ -23,7 +23,7 @@ namespace algorithmsTests
         }
     }
 
-    public class Person
+    public class MockPerson
     {
         public string Name;
         public string Adress;
