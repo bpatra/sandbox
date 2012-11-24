@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace algorithms
 {
-    public class GenericMergeSort<T> : ISortable<T>, IParallelSortable<T> where T : IComparable<T>
+    public class MergeSort<T> : ISortable<T>, IParallelSortable<T> where T : IComparable<T>
     {
         private T[] _items;
         private int _maxProcessors;
