@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace algorithms
 {
-    public class GenericMergeSort<T> : ISortable<T> where T : IComparable<T>
+    public class GenericMergeSort<T> : ISortable<T>, IParallelSortable<T> where T : IComparable<T>
     {
         private T[] _items;
+        private int _maxProcessors;
+        private int _threadSpawnArrayLength;// minimal length or subarray to get thread spawing. This avoid thread spawing for small arrays.
+
         public void Sort(T[] items)
         {
             _items = items;
@@ -59,6 +63,55 @@ namespace algorithms
                 }
 
             }
+        }
+
+        public void ParallelSort(T[] items, int cpuCount)
+        {
+            _items = items;
+            _maxProcessors = cpuCount;
+            _threadSpawnArrayLength = (int) Math.Pow(2, cpuCount);
+            ParallelSort(0, items.Length -1);
+        }
+
+        private void ParallelSort(int start, int end)
+        {
+            int length = end - start;
+            if (length == 0) return;
+
+            int middle = (start + end) / 2;
+
+            if (_threadCount <= _maxProcessors && length >= _threadSpawnArrayLength) //do not spawn too much thread.
+            {
+                Interlocked.Increment(ref _threadCount);
+                var context = new SortContext() { Array = _items, Left = middle + 1, Right = end };
+                var thread = new Thread(new ParameterizedThreadStart(SortDelegate));
+                thread.Start((object)context);
+                ParallelSort(start, middle);
+                thread.Join();
+                Interlocked.Decrement(ref _threadCount);
+            }
+            else
+            {
+                ParallelSort( middle + 1, end);
+                ParallelSort(start, middle);
+            }
+
+            Merge(start, middle, end);
+        }
+
+        private int _threadCount = 0;
+
+        private void SortDelegate(object ocontext)
+        {
+            var context = (SortContext) ocontext;
+            ParallelSort(context.Left, context.Right);
+        }
+
+        private class SortContext
+        {
+            public T[] Array { get; set; }
+            public int Left { get; set; }
+            public int Right { get; set; }
         }
     }
 }
