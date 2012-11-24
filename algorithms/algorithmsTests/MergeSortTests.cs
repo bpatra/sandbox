@@ -15,10 +15,10 @@ namespace algorithmsTests
         public void BasicSort()
         {
             var gen = new Random(44);
-            var iSort = new MergeSort<Mock>();
+            var iSort = new MergeSort<MockComparable>();
             foreach (var N in new[] { 1, 3, 5, 10 , 100000 })
             {
-                var mocks = Enumerable.Range(0, N).Select(i => new Mock(gen.Next(0, 10))).ToArray();
+                var mocks = Enumerable.Range(0, N).Select(i => new MockComparable(gen.Next(0, 10))).ToArray();
                 iSort.Sort(mocks);
                 Assert.IsTrue(mocks.IsSorted(), "#D" + N);
             }
@@ -29,10 +29,10 @@ namespace algorithmsTests
         {
             var gen = new Random(44);
             const int cpu = 4;
-            var mergeSort = new MergeSort<Mock>();
+            var mergeSort = new MergeSort<MockComparable>();
             foreach (var N in new[] { 1, 3, 5, 10, 100000 })
             {
-                var mocks = Enumerable.Range(0, N).Select(i => new Mock(gen.Next(0, 10))).ToArray();
+                var mocks = Enumerable.Range(0, N).Select(i => new MockComparable(gen.Next(0, 10))).ToArray();
                 mergeSort.ParallelSort(mocks, cpu);
                 Assert.IsTrue(mocks.IsSorted(), "#E" + N);
             }
@@ -43,11 +43,11 @@ namespace algorithmsTests
         {
              var gen = new Random(15);
             int N = 4000000;
-            var array1 = Enumerable.Range(0, N).Select(i => new Mock(gen.Next(int.MaxValue))).ToArray();
-            var array2 = (Mock[]) array1.Clone();
+            var array1 = Enumerable.Range(0, N).Select(i => new MockComparable(gen.Next(int.MaxValue))).ToArray();
+            var array2 = (MockComparable[]) array1.Clone();
             var watch = Stopwatch.StartNew();
 
-            var mSort = new MergeSort<Mock>();
+            var mSort = new MergeSort<MockComparable>();
             mSort.ParallelSort(array1, 4);
             Console.WriteLine(@"total time elapsed in parallel merge sort " + watch.Elapsed.TotalSeconds.ToString());
             watch.Reset();

@@ -27,8 +27,8 @@ namespace algorithmsTests
         public void EmptySort()
         {
             //Test empty array
-            var qSort = new QuickSort<Mock>(3);
-            qSort.Sort(new Mock[]{});
+            var qSort = new QuickSort<MockComparable>(3);
+            qSort.Sort(new MockComparable[]{});
 
             bool isSuccess = false;
             try

@@ -5,21 +5,28 @@ using System.Text;
 
 namespace algorithmsTests
 {
-    public class Mock: IComparable<Mock>, ICloneable
+    public class MockComparable: IComparable<MockComparable>, ICloneable
     {
         public int Value { get; private set; }
-        public Mock(int a)
+        public MockComparable(int a)
         {
             Value = a;
         }
-        public int CompareTo(Mock other)
+        public int CompareTo(MockComparable other)
         {
             return this.Value >= other.Value ? 1 : -1;
         }
 
         public object Clone()
         {
-            return new Mock(Value);
+            return new MockComparable(Value);
         }
+    }
+
+    public class Person
+    {
+        public string Name;
+        public string Adress;
+        public int Age;
     }
 }

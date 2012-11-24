@@ -58,13 +58,23 @@ namespace algorithms
                     }
                     currentNode = currentNode.Right;
                 }
-                return default(T);
+                throw new KeyNotFoundException("Key not found in hashtable");
             }
             set
             {
                 int hash = HashFunction(key);
                 if (_list[hash] != null)
                 {
+                    //Check that the key is not present
+                    var currentNode = _list[hash].Head;
+                    while (currentNode != null)
+                    {
+                        if (currentNode.Content.Key == key)
+                        {
+                            throw new ArgumentException("A value with the same key already exists");
+                        }
+                        currentNode = currentNode.Right;
+                    }
                     _list[hash].Add(new Pair<T> { Key = key, Value = value });
                 }
                 else
@@ -87,12 +97,5 @@ namespace algorithms
     {
         public T Value {get; set;}
         public string Key{get;set;}
-    }
-
-    public class Person
-    {
-        public string Name;
-        public string Adress;
-        public int Age;
     }
 }
