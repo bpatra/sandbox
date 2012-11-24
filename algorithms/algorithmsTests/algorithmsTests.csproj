@@ -45,8 +45,9 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GenericInsertionSortTests.cs" />
-    <Compile Include="GenericMergeSortTests.cs" />
+    <Compile Include="BubbleSortTests.cs" />
+    <Compile Include="InsertionSortTests.cs" />
+    <Compile Include="MergeSortTests.cs" />
     <Compile Include="HeapSortTests.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Mock.cs" />

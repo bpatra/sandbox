@@ -13,7 +13,7 @@ namespace algorithms
             {
                 var currentVal = items[i];
                 int j = i-1;
-                while(j >= 0 && currentVal.CompareTo(items[j]) < 1)
+                while(j >= 0 && items[j].CompareTo(currentVal) < 1)
                 {
                     items[j + 1] = items[j];
                     j--;

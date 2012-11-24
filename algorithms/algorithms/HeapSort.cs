@@ -5,7 +5,7 @@ using System.Text;
 
 namespace algorithms
 {
-    public class GenericHeapSort<T> : ISortable<T> where T : IComparable<T>
+    public class HeapSort<T> : ISortable<T> where T : IComparable<T>
     {
         private T[] _items;
         public void Sort(T[] items)

@@ -11,7 +11,7 @@ namespace algorithmsTests
     /// Summary description for GenericInsertionSortTests
     /// </summary>
     [TestClass]
-    public class GenericInsertionSortTests
+    public class InsertionSortTests
     {
 
         [TestMethod]

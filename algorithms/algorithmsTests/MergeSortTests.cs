@@ -9,13 +9,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace algorithmsTests
 {
     [TestClass]
-    public class GenericMergeSortTests
+    public class MergeSortTests
     {
         [TestMethod]
         public void BasicSort()
         {
             var gen = new Random(44);
-            var iSort = new GenericMergeSort<Mock>();
+            var iSort = new MergeSort<Mock>();
             foreach (var N in new[] { 1, 3, 5, 10 , 100000 })
             {
                 var mocks = Enumerable.Range(0, N).Select(i => new Mock(gen.Next(0, 10))).ToArray();
@@ -29,7 +29,7 @@ namespace algorithmsTests
         {
             var gen = new Random(44);
             const int cpu = 4;
-            var mergeSort = new GenericMergeSort<Mock>();
+            var mergeSort = new MergeSort<Mock>();
             foreach (var N in new[] { 1, 3, 5, 10, 100000 })
             {
                 var mocks = Enumerable.Range(0, N).Select(i => new Mock(gen.Next(0, 10))).ToArray();
@@ -47,7 +47,7 @@ namespace algorithmsTests
             var array2 = (Mock[]) array1.Clone();
             var watch = Stopwatch.StartNew();
 
-            var mSort = new GenericMergeSort<Mock>();
+            var mSort = new MergeSort<Mock>();
             mSort.ParallelSort(array1, 4);
             Console.WriteLine(@"total time elapsed in parallel merge sort " + watch.Elapsed.TotalSeconds.ToString());
             watch.Reset();

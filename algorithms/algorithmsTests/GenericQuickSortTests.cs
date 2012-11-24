@@ -8,12 +8,12 @@ using algorithms;
 namespace algorithmsTests
 {
     [TestClass]
-    public class GenricQuickSortTests
+    public class QuickSortTests
     {
         [TestMethod]
         public void BasicSort()
         {
-            var qSort = new GenericQuickSort<int>(12);
+            var qSort = new QuickSort<int>(12);
             var gen = new Random(15);
             foreach(var N in new[]{1, 3 , 4,5})
             {
@@ -27,7 +27,7 @@ namespace algorithmsTests
         public void EmptySort()
         {
             //Test empty array
-            var qSort = new GenericQuickSort<Mock>(3);
+            var qSort = new QuickSort<Mock>(3);
             qSort.Sort(new Mock[]{});
 
             bool isSuccess = false;
