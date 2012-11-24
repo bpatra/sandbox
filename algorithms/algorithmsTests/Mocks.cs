@@ -29,4 +29,9 @@ namespace algorithmsTests
         public string Adress;
         public int Age;
     }
+
+    public class MockJob
+    {
+        public string Name;
+    }
 }
