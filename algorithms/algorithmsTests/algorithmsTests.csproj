@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BubbleSortTests.cs" />
+    <Compile Include="CountingSortTests.cs" />
     <Compile Include="InsertionSortTests.cs" />
     <Compile Include="MaxPriorityQueueTests.cs" />
     <Compile Include="MergeSortTests.cs" />
