@@ -7,7 +7,7 @@ namespace algorithms
 {
     public class MaxPriorityQueue<T>
     {
-        private readonly KeyValuePair<double,T>[] _items;
+        private KeyValuePair<double,T>[] _items;
         private int[] _heap;
 
         public int Count
@@ -62,7 +62,18 @@ namespace algorithms
 
         public void Insert(KeyValuePair<double,T> item)
         {
-            throw new NotImplementedException();
+            var newItems = new KeyValuePair<double, T>[_items.Length + 1];
+            Array.Copy(_items, 0, newItems, 0 , _items.Length);
+            _items = newItems;
+            _items[_items.Length - 1] = item;
+
+            var newHeap = new int[_heap.Length +1];
+            Array.Copy(_heap,0, newHeap,0, _heap.Length);
+            _heap = newHeap;
+
+            _heap[_heap.Length-1] = _items.Length - 1;
+
+            IncreaseKey(_heap.Length - 1, item.Key); //force heapification of the heap.
         }
 
         public T ExtractMax()
