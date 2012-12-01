@@ -143,7 +143,13 @@ namespace algorithms
 
         public void Delete(TNode<T> node)
         {
-            throw  new NotImplementedException();
+           //if(node.LeftChild && node.RightChild ==null)
+           //{
+           //    if(node.Parent.LeftChild == node)
+           //    {
+           //        node.Parent.LeftChild.Parent == null;
+           //    }
+           //}
         }
 
     }

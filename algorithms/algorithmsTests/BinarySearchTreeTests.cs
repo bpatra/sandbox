@@ -106,5 +106,48 @@ namespace algorithmsTests
             Assert.AreEqual(secondNode, tree.Search(4),"#D01");
             Assert.AreEqual(fourthNode, tree.Search(9), "#D02");
         }
+
+        [TestMethod]
+        public void Delete()
+        {
+            var tree = new BinarySearchTree<int>();
+            var firstNode = new TNode<int>(17);
+            tree.Insert(firstNode);
+            var secondNode = new TNode<int>(7);
+            tree.Insert(secondNode);
+            var thirdNode = new TNode<int>(4);
+            tree.Insert(thirdNode);
+            var fourthNode = new TNode<int>(15);
+            tree.Insert(fourthNode);
+            tree.Insert(new TNode<int>(10));
+            tree.Insert(new TNode<int>(16));
+            tree.Insert(new TNode<int>(8));
+            tree.Insert(new TNode<int>(12));
+
+            tree.Delete(secondNode);
+            var result = tree.CollectInOrder().ToArray();
+            var expected = new int[] {4,8,10,12,15,16,17};
+            for(int i=0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(expected[i], result[i], "#E"+i);
+            }
+
+            tree.Delete(thirdNode);
+            result = tree.CollectInOrder().ToArray();
+            expected = new int[] {8, 10, 12, 15, 16, 17 };
+            for (int i = 0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(expected[i], result[i], "#EE" + i);
+            }
+
+            tree.Delete(firstNode);
+            result = tree.CollectInOrder().ToArray();
+            expected = new int[] { 8, 10, 12, 15, 16};
+            for (int i = 0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(expected[i], result[i], "#EEE" + i);
+            }
+
+        }
     }
 }
