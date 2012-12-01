@@ -19,13 +19,13 @@ namespace algorithmsTests
         {
             var tree = new BinarySearchTree<MockComparable>();
             var mock = new MockComparable(3);
-            var node = new TNode<MockComparable> { Content = mock };
+            var node = new TNode<MockComparable>(mock);
             tree.Insert(node);
 
             Assert.IsNull(node.Parent, "#A01");
 
             var mock2 = new MockComparable(7);
-            var node2 = new TNode<MockComparable> { Content = mock2 };
+            var node2 = new TNode<MockComparable>(mock2);
             tree.Insert(node2);
             Assert.AreEqual(node2, node.RightChild, "#A02");
             Assert.AreEqual(node, node2.Parent, "#A02bis");
@@ -36,14 +36,14 @@ namespace algorithmsTests
         {
             var tree = new BinarySearchTree<MockComparable>();
             var mock = new MockComparable(3);
-            var node = new TNode<MockComparable> { Content = mock };
+            var node = new TNode<MockComparable>(mock);
             tree.Insert(node);
 
             Assert.AreEqual(3, tree.Maximum().Content.Value, "#AA01");
             Assert.AreEqual(3, tree.Minimum().Content.Value, "#AA01bis");
 
             var mock2 = new MockComparable(7);
-            var node2 = new TNode<MockComparable> { Content = mock2 };
+            var node2 = new TNode<MockComparable>(mock2);
             tree.Insert(node2);
             Assert.AreEqual(7, tree.Maximum().Content.Value, "#AA02");
             Assert.AreEqual(3, tree.Minimum().Content.Value, "#AA02bis");
@@ -53,11 +53,11 @@ namespace algorithmsTests
         public void InOrder()
         {
             var tree = new BinarySearchTree<int>();
-            tree.Insert(new TNode<int>{Content = 8});
-            tree.Insert(new TNode<int>{ Content = 15 });
-            tree.Insert(new TNode<int> { Content = 5});
-            tree.Insert(new TNode<int> { Content = 17 });
-            tree.Insert(new TNode<int> { Content = 14 });
+            tree.Insert(new TNode<int>( 8));
+            tree.Insert(new TNode<int>( 15 ));
+            tree.Insert(new TNode<int> (  5));
+            tree.Insert(new TNode<int> ( 17 ));
+            tree.Insert(new TNode<int> ( 14 ));
 
             var content = new int[] {5, 8, 14, 15, 17};
             var result = tree.CollectInOrder().ToArray();
@@ -72,20 +72,20 @@ namespace algorithmsTests
         public void TestSuccessor()
         {
             var tree = new BinarySearchTree<int>();
-            var firstNode = new TNode<int> {Content = 7};
+            var firstNode = new TNode<int> (7);
             tree.Insert(firstNode);
             Assert.IsNull(tree.Sucessor(firstNode), "#C01");
 
-            var secondNode = new TNode<int> { Content = 4 };
+            var secondNode = new TNode<int>( 4 );
             tree.Insert(secondNode);
             Assert.AreEqual(firstNode, tree.Sucessor(secondNode), "#C02");
 
-            var thirdNode = new TNode<int> { Content = 5 };
+            var thirdNode = new TNode<int> (5) ;
             tree.Insert(thirdNode);
             Assert.AreEqual(thirdNode, tree.Sucessor(secondNode), "#C03");
             Assert.IsNull(tree.Sucessor(firstNode), "#C04");
 
-            var fourthNode = new TNode<int>() {Content = 9};
+            var fourthNode = new TNode<int>(9);
             tree.Insert(fourthNode);
             Assert.IsNull(tree.Sucessor(fourthNode), "#C05");
         }
@@ -94,13 +94,13 @@ namespace algorithmsTests
         public void Search()
         {
             var tree = new BinarySearchTree<int>();
-            var firstNode = new TNode<int> {Content = 7};
+            var firstNode = new TNode<int>(7);
             tree.Insert(firstNode);
-            var secondNode = new TNode<int> { Content = 4 };
+            var secondNode = new TNode<int>(4);
             tree.Insert(secondNode);
-            var thirdNode = new TNode<int> { Content = 5 };
+            var thirdNode = new TNode<int>(5);
             tree.Insert(thirdNode);
-            var fourthNode = new TNode<int> {Content = 9};
+            var fourthNode = new TNode<int>(9);
             tree.Insert(fourthNode);
 
             Assert.AreEqual(secondNode, tree.Search(4),"#D01");

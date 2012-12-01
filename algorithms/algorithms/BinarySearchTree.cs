@@ -150,9 +150,14 @@ namespace algorithms
 
     public class TNode<S>
     {
-        public S Content { get; set; }
+        public S Content { get; private set; }
         public TNode<S> Parent { get; set; }
         public TNode<S> LeftChild { get; set; }
         public TNode<S> RightChild { get; set; }
+
+        public TNode(S item)
+        {
+            Content = item;
+        }
     }
 }
