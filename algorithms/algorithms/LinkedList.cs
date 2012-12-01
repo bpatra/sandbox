@@ -7,14 +7,14 @@ namespace algorithms
 {
     public class LList<S>
     {
-        private Node<S> _sentinel;
+        private LNode<S> _sentinel;
 
-        public Node<S> Head { get { return _sentinel.Next; } }
+        public LNode<S> Head { get { return _sentinel.Next; } }
         public S HeadContent { get { return _sentinel.Next.Content; } }
 
         public LList()
         {
-            _sentinel = new Node<S>(default(S)){Previous = null, Next = null};
+            _sentinel = new LNode<S>(default(S)){Previous = null, Next = null};
             _sentinel.Next = _sentinel;
             _sentinel.Previous = _sentinel;
         }
@@ -22,25 +22,25 @@ namespace algorithms
 
         public void Add(S content)
         {
-            var newHead = new Node<S>(content);
+            var newHead = new LNode<S>(content);
             Add(newHead);
         }
 
-        public void Add(Node<S> node)
+        public void Add(LNode<S> lNode)
         {
-            node.Next = _sentinel.Next;
-            _sentinel.Next.Previous = node;
-            _sentinel.Next = node;
-            node.Previous = _sentinel;
+            lNode.Next = _sentinel.Next;
+            _sentinel.Next.Previous = lNode;
+            _sentinel.Next = lNode;
+            lNode.Previous = _sentinel;
         }
 
-        public void Delete(Node<S> node)
+        public void Delete(LNode<S> lNode)
         {
-            node.Previous.Next = node.Next;
-            node.Next.Previous = node.Previous;
+            lNode.Previous.Next = lNode.Next;
+            lNode.Next.Previous = lNode.Previous;
         }
         
-        public Node<S> Search(S s)
+        public LNode<S> Search(S s)
         {
             var currentNode = _sentinel.Next;
             while (currentNode != _sentinel)
@@ -58,13 +58,13 @@ namespace algorithms
         }
     }
 
-    public class Node<S>
+    public class LNode<S>
     {
         public S Content { get; private set; }
-        public Node<S> Next { get; set; }
-        public Node<S> Previous { get; set; }
+        public LNode<S> Next { get; set; }
+        public LNode<S> Previous { get; set; }
 
-        public Node(S content)
+        public LNode(S content)
         {
             Content = content;
         }

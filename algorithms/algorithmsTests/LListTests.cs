@@ -15,14 +15,14 @@ namespace algorithmsTests
         {
             var list = new LList<int>();
 
-            list.Add(new Node<int>(6));
+            list.Add(new LNode<int>(6));
             Assert.AreEqual(6, list.HeadContent);
 
-            list.Add(new Node<int>(5));
+            list.Add(new LNode<int>(5));
 
             Assert.AreEqual(5, list.HeadContent);
 
-            list.Add(new Node<int>(15));
+            list.Add(new LNode<int>(15));
             Assert.AreEqual(15, list.HeadContent);
 
         }
@@ -32,7 +32,7 @@ namespace algorithmsTests
         {
             var list = new LList<int>();
 
-            var node = new Node<int>(6);
+            var node = new LNode<int>(6);
             list.Add(node);
 
             list.Add(24);
@@ -44,7 +44,7 @@ namespace algorithmsTests
         {
             var list = new LList<int>();
 
-            var node = new Node<int>(6);
+            var node = new LNode<int>(6);
             list.Add(node);
 
             list.Add(24);
