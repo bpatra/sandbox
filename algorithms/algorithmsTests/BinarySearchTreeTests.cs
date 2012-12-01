@@ -22,14 +22,31 @@ namespace algorithmsTests
             var node = new TNode<MockComparable> { Content = mock };
             tree.Insert(node);
 
-            Assert.AreEqual(3, tree.Maximum().Content.Value, "#A01");
-            Assert.AreEqual(3, tree.Minimum().Content.Value, "#A01bis");
+            Assert.IsNull(node.Parent, "#A01");
 
             var mock2 = new MockComparable(7);
             var node2 = new TNode<MockComparable> { Content = mock2 };
             tree.Insert(node2);
-            Assert.AreEqual(7, tree.Maximum().Content.Value, "#A02");
-            Assert.AreEqual(3, tree.Minimum().Content.Value, "#A02bis");
+            Assert.AreEqual(node2, node.RightChild, "#A02");
+            Assert.AreEqual(node, node2.Parent, "#A02bis");
+        }
+
+        [TestMethod]
+        public void MaximumMinimum()
+        {
+            var tree = new BinarySearchTree<MockComparable>();
+            var mock = new MockComparable(3);
+            var node = new TNode<MockComparable> { Content = mock };
+            tree.Insert(node);
+
+            Assert.AreEqual(3, tree.Maximum().Content.Value, "#AA01");
+            Assert.AreEqual(3, tree.Minimum().Content.Value, "#AA01bis");
+
+            var mock2 = new MockComparable(7);
+            var node2 = new TNode<MockComparable> { Content = mock2 };
+            tree.Insert(node2);
+            Assert.AreEqual(7, tree.Maximum().Content.Value, "#AA02");
+            Assert.AreEqual(3, tree.Minimum().Content.Value, "#AA02bis");
         }
 
         [TestMethod]
@@ -49,7 +66,45 @@ namespace algorithmsTests
             {
                 Assert.AreEqual(content[i], result[i], "#B"+i);
             }
+        }
 
+        [TestMethod]
+        public void TestSuccessor()
+        {
+            var tree = new BinarySearchTree<int>();
+            var firstNode = new TNode<int> {Content = 7};
+            tree.Insert(firstNode);
+            Assert.IsNull(tree.Sucessor(firstNode), "#C01");
+
+            var secondNode = new TNode<int> { Content = 4 };
+            tree.Insert(secondNode);
+            Assert.AreEqual(firstNode, tree.Sucessor(secondNode), "#C02");
+
+            var thirdNode = new TNode<int> { Content = 5 };
+            tree.Insert(thirdNode);
+            Assert.AreEqual(thirdNode, tree.Sucessor(secondNode), "#C03");
+            Assert.IsNull(tree.Sucessor(firstNode), "#C04");
+
+            var fourthNode = new TNode<int>() {Content = 9};
+            tree.Insert(fourthNode);
+            Assert.IsNull(tree.Sucessor(fourthNode), "#C05");
+        }
+
+        [TestMethod]
+        public void Search()
+        {
+            var tree = new BinarySearchTree<int>();
+            var firstNode = new TNode<int> {Content = 7};
+            tree.Insert(firstNode);
+            var secondNode = new TNode<int> { Content = 4 };
+            tree.Insert(secondNode);
+            var thirdNode = new TNode<int> { Content = 5 };
+            tree.Insert(thirdNode);
+            var fourthNode = new TNode<int> {Content = 9};
+            tree.Insert(fourthNode);
+
+            Assert.AreEqual(secondNode, tree.Search(4),"#D01");
+            Assert.AreEqual(fourthNode, tree.Search(9), "#D02");
         }
     }
 }

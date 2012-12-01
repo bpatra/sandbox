@@ -33,7 +33,24 @@ namespace algorithms
 
         public TNode<T> Search(T item)
         {
-            throw new NotImplementedException();
+            return Search(_root, item);
+        }
+
+        public TNode<T> Search(TNode<T> startNode, T item)
+        {
+            if(startNode == null) return null;
+            if(startNode.Content.Equals(item))
+            {
+                return startNode;
+            }
+            else if (item.CompareTo(startNode.Content) < 1)
+            {
+                return Search(startNode.LeftChild, item);
+            }
+            else
+            {
+                return Search(startNode.RightChild, item);
+            }
         }
 
         public TNode<T> Minimum()
@@ -73,7 +90,19 @@ namespace algorithms
 
         public TNode<T> Sucessor(TNode<T> node)
         {
-            throw new NotImplementedException();
+            if(node.RightChild != null)
+            {
+                return Minimum(node.RightChild);
+            }
+            else
+            {
+                var parent = node.Parent;
+                while (parent != null && parent.Content.CompareTo(node.Content) < 1)
+                {
+                    parent = parent.Parent;
+                }
+                return parent;
+            }
         }
 
         public void Insert(TNode<T> node)
