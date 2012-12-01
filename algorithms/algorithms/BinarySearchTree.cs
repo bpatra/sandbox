@@ -143,13 +143,52 @@ namespace algorithms
 
         public void Delete(TNode<T> node)
         {
-           //if(node.LeftChild && node.RightChild ==null)
-           //{
-           //    if(node.Parent.LeftChild == node)
-           //    {
-           //        node.Parent.LeftChild.Parent == null;
-           //    }
-           //}
+            if (node.LeftChild == null && node.RightChild == null)
+            {
+                if(node == _root)
+                {
+                    _root = null;
+                }
+                else if (node.Parent.LeftChild == node)
+                {
+                    node.Parent.LeftChild = null;
+                }
+                else
+                {
+                    node.Parent.RightChild = null;
+                }
+            }
+            else if(node.LeftChild ==null || node.RightChild == null)
+            {
+                if(node.LeftChild !=null)
+                {
+                    node.LeftChild.Parent = node.Parent;
+                    //check if node is root.
+                    if (node.Parent!=null) node.Parent.LeftChild = node.LeftChild;
+                }
+                else
+                {
+                    node.RightChild.Parent = node.Parent;
+                    //check if node is root.
+                    if (node.Parent != null) node.Parent.RightChild = node.RightChild;
+                }
+            }
+            else
+            {
+                var successor = Sucessor(node);
+
+                //successor has at most one right child
+                if (successor.RightChild != null) successor.RightChild.Parent = successor.Parent;
+                if (successor.Parent != null) successor.Parent.LeftChild = successor.LeftChild;
+
+                successor.LeftChild = node.LeftChild;
+                successor.RightChild = node.RightChild;
+
+                
+                node.LeftChild.Parent = successor;
+                node.RightChild.Parent = successor;
+                if (node.Parent != null && node.Parent.LeftChild == node) node.Parent.LeftChild = successor;
+            }
         }
 
     }
