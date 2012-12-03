@@ -184,7 +184,7 @@ namespace algorithms
                 successor.LeftChild = node.LeftChild;
                 successor.RightChild = node.RightChild;
 
-                
+
                 node.LeftChild.Parent = successor;
                 node.RightChild.Parent = successor;
                 if (node.Parent != null && node.Parent.LeftChild == node) node.Parent.LeftChild = successor;
