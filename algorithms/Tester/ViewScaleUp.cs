@@ -12,7 +12,7 @@ namespace Tester
         public static void Start()
         {
             bool first = true;
-            while ( first || Console.ReadLine() != "y")
+            while ( first || Console.ReadLine() != "q")
             {
                 first = false;
                 var generator = new Random(1998);
@@ -26,7 +26,7 @@ namespace Tester
                 var watch = Stopwatch.StartNew();
                 pMergeSort.ParallelSort(items, maxThread);
                 Console.WriteLine(@"time elapsed in s.{0}", watch.Elapsed.TotalSeconds);
-                Console.WriteLine(@"Press q key to exit");
+                Console.WriteLine(@"Press 'q' to exit...");
             }
 
         }
