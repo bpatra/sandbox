@@ -16,7 +16,7 @@ namespace Tester
             {
                 first = false;
                 var generator = new Random(1998);
-                const int N = 10000;
+                const int N = 1000000;
                 var items = Enumerable.Range(0, N).Select(i => generator.Next(0, int.MaxValue - 1)).ToArray();
                 var pMergeSort = new MergeSort<int>();
                 Console.WriteLine(@"Change processor affinity in task manager and set the max number of thread...");

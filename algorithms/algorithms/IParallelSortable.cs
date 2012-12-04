@@ -7,6 +7,6 @@ namespace algorithms
 {
     public interface IParallelSortable<T> where T : IComparable<T>
     {
-        void ParallelSort(T[] items, int cpuCount);
+        void ParallelSort(T[] items, int maxThreadCount);
     }
 }

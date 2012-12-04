@@ -9,7 +9,7 @@ namespace algorithms
     public class MergeSort<T> : ISortable<T>, IParallelSortable<T> where T : IComparable<T>
     {
         private T[] _items;
-        private int _maxProcessors;
+        private int _maxThreadCount;
         private int _threadSpawnArrayLength;// minimal length or subarray to get thread spawing. This avoid thread spawing for small arrays.
 
         public void Sort(T[] items)
@@ -65,11 +65,11 @@ namespace algorithms
             }
         }
 
-        public void ParallelSort(T[] items, int cpuCount)
+        public void ParallelSort(T[] items, int maxThreadCount)
         {
             _items = items;
-            _maxProcessors = cpuCount;
-            _threadSpawnArrayLength = (int) Math.Pow(2, cpuCount);
+            _maxThreadCount = maxThreadCount;
+            _threadSpawnArrayLength = (int) Math.Pow(2, maxThreadCount);
             ParallelSort(0, items.Length -1);
         }
 
@@ -80,7 +80,7 @@ namespace algorithms
 
             int middle = (start + end) / 2;
 
-            if (_threadCount <= _maxProcessors && length >= _threadSpawnArrayLength) //do not spawn too much thread.
+            if (_threadCount <= _maxThreadCount && length >= _threadSpawnArrayLength) //do not spawn too much thread.
             {
                 Interlocked.Increment(ref _threadCount);
                 var context = new SortContext() { Array = _items, Left = middle + 1, Right = end };
