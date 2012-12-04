@@ -69,7 +69,8 @@ namespace algorithms
         {
             _items = items;
             _maxThreadCount = maxThreadCount;
-            _threadSpawnArrayLength = (int) Math.Pow(2, maxThreadCount);
+            _threadSpawnArrayLength =  _items.Length / (int) Math.Pow(2, maxThreadCount);
+            Interlocked.Increment(ref _threadCount);
             ParallelSort(0, items.Length -1);
         }
 
@@ -80,7 +81,7 @@ namespace algorithms
 
             int middle = (start + end) / 2;
 
-            if (_threadCount <= _maxThreadCount && length >= _threadSpawnArrayLength) //do not spawn too much thread.
+            if (_threadCount < _maxThreadCount && length > _threadSpawnArrayLength) //do not spawn too much thread.
             {
                 Interlocked.Increment(ref _threadCount);
                 var context = new SortContext() { Array = _items, Left = middle + 1, Right = end };
