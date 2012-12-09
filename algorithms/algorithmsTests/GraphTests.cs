@@ -45,8 +45,6 @@ namespace algorithmsTests
             var graph = new Graph(2);
             graph.Add(0, edge0);
             graph.Add(1, edge1);
-
-
         }
     }
 }
