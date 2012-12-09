@@ -67,6 +67,7 @@
     <Compile Include="NaiveHashTableTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GenericQuickSortTests.cs" />
+    <Compile Include="QueueTests.cs" />
     <Compile Include="QuickSortLikeSelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>

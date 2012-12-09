@@ -8,6 +8,7 @@ namespace algorithms
     public class Queue<T>
     {
         private readonly int _maxSlot;
+
         public Queue()
         {
             _maxSlot = 1000;
@@ -24,6 +25,11 @@ namespace algorithms
         }
 
         public T DeQueue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public int Count()
         {
             throw new NotImplementedException();
         }
