@@ -94,6 +94,7 @@
     <Compile Include="BinarySearchTree.cs" />
     <Compile Include="BubbleSort.cs" />
     <Compile Include="CountingSort.cs" />
+    <Compile Include="Graph.cs" />
     <Compile Include="HeapSort.cs" />
     <Compile Include="InsertionSort.cs" />
     <Compile Include="LinkedList.cs" />
