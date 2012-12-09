@@ -5,28 +5,40 @@ using System.Text;
 
 namespace algorithms
 {
-    public class Graph<T>
+    public class Graph
     {
-        LList<T>[] _graph;
-        public Graph()
+        LList<int>[] _graph;
+
+        public Graph(int vertexCount)
         {
-            _graph = new LList<T>[0];
+            _graph = new LList<int>[vertexCount];
         }
 
-        public void Add(T target, IEnumerable<T> neighbors)
+        /// <summary>
+        ///Mthod to add a new vertex with its neighbors.
+        /// </summary>
+        /// <param name="vertex"></param>
+        /// <param name="neighbors"></param>
+        public void Add(int vertex, IEnumerable<int> neighbors)
         {
-            var newGraph = new LList<T>[_graph.Length + 1];
-            Array.Copy(_graph, newGraph, _graph.Length);
+            if (vertex >= _graph.Length)
+            {
+                throw new ArgumentOutOfRangeException("vertex not compatible with current graph definition");
+            }
 
-            var linkedList = new LList<T>();
+            var linkedList = new LList<int>();
             foreach (var neighbor in neighbors)
             {
+                if (neighbor >= _graph.Length)
+                {
+                    throw new ArgumentOutOfRangeException("vertex not compatible with current graph definition");
+                }
                 linkedList.Add(neighbor);
             }
-            newGraph[newGraph.Length - 1] = linkedList;
+            _graph[vertex] = linkedList;
         }
 
-        public IEnumerable<T> BFS()
+        public IEnumerable<int> BFS()
         {
             throw new NotImplementedException();
         }
