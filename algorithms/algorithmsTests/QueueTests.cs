@@ -52,23 +52,41 @@ namespace algorithmsTests
         }
 
         [TestMethod]
-        public void OverFlow()
+        public void SubtleCount()
         {
-            var queue = new algorithms.Queue<string>(4);
+            var queue = new algorithms.Queue<string>(5);
             queue.EnQueue("toto");
-            queue.EnQueue("toto");
-            queue.EnQueue("toto");
-            queue.EnQueue("toto");
-            bool isSuccess = false;
-            try
-            {
-                queue.EnQueue("toto");
-            }
-            catch (OverflowException)
-            {
-                isSuccess = true;
-            }
-            Assert.IsTrue(isSuccess);
+            queue.EnQueue("tata");
+            queue.DeQueue();
+            queue.DeQueue();
+            Assert.AreEqual(0, queue.Count());
+            queue.EnQueue("titi");
+            queue.EnQueue("tutu");
+            queue.EnQueue("tyty");
+            queue.EnQueue("rara");
+            Assert.AreEqual(4, queue.Count());
+
         }
+
+
+        //[TestMethod]
+        //public void OverFlow()
+        //{
+        //    var queue = new algorithms.Queue<string>(4);
+        //    queue.EnQueue("toto");
+        //    queue.EnQueue("toto");
+        //    queue.EnQueue("toto");
+        //    queue.EnQueue("toto");
+        //    bool isSuccess = false;
+        //    try
+        //    {
+        //        queue.EnQueue("toto");
+        //    }
+        //    catch (OverflowException)
+        //    {
+        //        isSuccess = true;
+        //    }
+        //    Assert.IsTrue(isSuccess);
+        //}
     }
 }
