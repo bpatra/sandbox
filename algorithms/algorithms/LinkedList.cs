@@ -11,6 +11,7 @@ namespace algorithms
 
         public LNode<S> Head { get { return _sentinel.Next; } }
         public S HeadContent { get { return _sentinel.Next.Content; } }
+        public LNode<S> Sentinel { get { return _sentinel; } }
 
         public LList()
         {

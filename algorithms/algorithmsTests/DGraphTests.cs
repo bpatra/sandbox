@@ -53,7 +53,7 @@ namespace algorithmsTests
             var edge0 = new[]{1,2};
             var edge1 = new[] { 3};
             var edge2 = new[] { 3, 1 ,4};
-            var edge3 = new[] { 1};
+            var edge3 = new[] { 0};
             var edge4 = new[] {3,1 };
             var dgraph = new DGraph(5);
             dgraph.Add(0, edge0);

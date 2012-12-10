@@ -38,9 +38,33 @@ namespace algorithms
             _graph[vertex] = linkedList;
         }
 
-        public IEnumerable<int> BFS(int root)
+        public List<int> BFS(int root)
         {
-            throw new NotImplementedException();
+            int[] status = new int[_graph.Length];//O for unvisited, 1 for enqueue, 2 for visited.
+            var list = new List<int>();
+            
+            var queue = new Queue<int>(_graph.Length + 1);
+            queue.EnQueue(root);
+            list.Add(root);
+            status[root] = 1;
+            while(queue.Count > 0)
+            {
+                var element = queue.DeQueue();
+                var child = _graph[element].Head;
+                while(child != _graph[element].Sentinel)
+                {
+                    if(status[child.Content]==0)
+                    {
+                        status[child.Content] = 1;
+                        list.Add(child.Content);
+                        queue.EnQueue(child.Content);
+                    }
+                    child = child.Next;
+                }
+               
+            }
+            return list;
+
         }
     }
 }
