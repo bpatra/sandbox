@@ -11,6 +11,7 @@ namespace algorithms
         int _head;
         int _tail;
         T[] _array;
+        private int _count;
 
         public Queue()
         {
@@ -29,37 +30,36 @@ namespace algorithms
             if (maxSlot <= 1) throw new ArgumentOutOfRangeException("Handle queue with size > 1 only");
             _maxSlot = maxSlot;
             Initialize();
+            _count = 0;
         }
 
         public void EnQueue(T item)
         {
             if (_tail == -1)
             {
-                 _tail = _head = 0;
+                _tail = _head = 0;
+                ++_count;
             }
             else
             {
-                int count = Count();
+                if (++_count > _maxSlot) throw new OverflowException("queue overflow");
                 _tail = (_tail + 1) % _maxSlot;
             }
-
             _array[_tail] = item;
         }
 
         public T DeQueue()
         {
-            if (Count() == 0) throw new InvalidOperationException("cannot dequeue empty queue");
+            if (_count == 0) throw new InvalidOperationException("cannot dequeue empty queue");
             var value = _array[_head];
             _head = _head + 1 % _maxSlot;
+            _count--;
             return value;
         }
 
-        public int Count()
+        public int Count
         {
-            if (_tail == -1) return 0;
-            var result = _tail - _head + 1;
-            if (result < 0) result+= _maxSlot;
-            return  result % _maxSlot;
+            get { return _count; }
         }
     }
 }

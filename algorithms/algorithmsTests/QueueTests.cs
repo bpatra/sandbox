@@ -37,7 +37,7 @@ namespace algorithmsTests
             var queue = new algorithms.Queue<string>();
             queue.EnQueue(content);
             Assert.AreEqual(content, queue.DeQueue());
-            Assert.AreEqual(0, queue.Count());
+            Assert.AreEqual(0, queue.Count);
         }
 
         [TestMethod]
@@ -48,7 +48,7 @@ namespace algorithmsTests
             queue.EnQueue(content);
             queue.EnQueue("tata");
             Assert.AreEqual(content, queue.DeQueue());
-            Assert.AreEqual(1, queue.Count());
+            Assert.AreEqual(1, queue.Count);
         }
 
         [TestMethod]
@@ -59,34 +59,34 @@ namespace algorithmsTests
             queue.EnQueue("tata");
             queue.DeQueue();
             queue.DeQueue();
-            Assert.AreEqual(0, queue.Count());
+            Assert.AreEqual(0, queue.Count);
             queue.EnQueue("titi");
             queue.EnQueue("tutu");
             queue.EnQueue("tyty");
             queue.EnQueue("rara");
-            Assert.AreEqual(4, queue.Count());
+            Assert.AreEqual(4, queue.Count);
 
         }
 
 
-        //[TestMethod]
-        //public void OverFlow()
-        //{
-        //    var queue = new algorithms.Queue<string>(4);
-        //    queue.EnQueue("toto");
-        //    queue.EnQueue("toto");
-        //    queue.EnQueue("toto");
-        //    queue.EnQueue("toto");
-        //    bool isSuccess = false;
-        //    try
-        //    {
-        //        queue.EnQueue("toto");
-        //    }
-        //    catch (OverflowException)
-        //    {
-        //        isSuccess = true;
-        //    }
-        //    Assert.IsTrue(isSuccess);
-        //}
+        [TestMethod]
+        public void OverFlow()
+        {
+            var queue = new algorithms.Queue<string>(4);
+            queue.EnQueue("toto");
+            queue.EnQueue("toto");
+            queue.EnQueue("toto");
+            queue.EnQueue("toto");
+            bool isSuccess = false;
+            try
+            {
+                queue.EnQueue("toto");
+            }
+            catch (OverflowException)
+            {
+                isSuccess = true;
+            }
+            Assert.IsTrue(isSuccess);
+        }
     }
 }
