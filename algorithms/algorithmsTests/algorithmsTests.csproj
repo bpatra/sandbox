@@ -56,7 +56,7 @@
     <Compile Include="BinarySearchTreeTests.cs" />
     <Compile Include="BubbleSortTests.cs" />
     <Compile Include="CountingSortTests.cs" />
-    <Compile Include="GraphTests.cs" />
+    <Compile Include="DGraphTests.cs" />
     <Compile Include="InsertionSortTests.cs" />
     <Compile Include="LListTests.cs" />
     <Compile Include="MaxPriorityQueueTests.cs" />
