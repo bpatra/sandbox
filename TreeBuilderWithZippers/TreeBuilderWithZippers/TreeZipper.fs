@@ -4,9 +4,16 @@ open System
 
 type Tree =
         |TreeNode of string* Tree list
+        |Empty
         member this.GetLabel =
             match this with
+            | Empty -> failwith "cannot get the label of an empty tree"
             | TreeNode(lbl,_) -> lbl
+
+let rec branchToTree (inputList:list<string>) =
+    match inputList with
+        | [] -> Tree.Empty
+        | head::tail ->  TreeNode (head, [branchToTree tail])
             
 type Path =
         |Top of string
@@ -38,6 +45,7 @@ let go_up (Loc(t, p)) =
 
 let go_down (Loc(t,p)) =
         match t with
+        | Empty -> failwith "cannot go down an empty tree"
         | TreeNode(_,[])-> failwith "no children cannot go further"
         | TreeNode(label,first::childs) -> Loc(first,PathNode(first.GetLabel,[],p, childs))
 
@@ -53,6 +61,7 @@ let insert_right r (Loc(t,p)) =
 
 let insert_down t1 (Loc(t,p)) =
         match t with
+        | Empty -> Loc(t1, Top(t1.GetLabel))
         | TreeNode(label, children) -> Loc(t1, PathNode(t1.GetLabel,[],p, children))
 
 let rec root (Loc (t, p) as l) = 
@@ -60,18 +69,25 @@ let rec root (Loc (t, p) as l) =
         | Top(_) -> t
         | _ -> root (go_up l) 
 
-let zipper t = Loc(t, Top(t.GetLabel))
+let getZipper t = 
+    match t with
+        | Empty -> Loc(Empty, Top(""))
+        | TreeNode(value,_ )-> Loc(t, Top(value))
 
 let rec appendToTreeZipper (Loc (t,p) as l) (branch:list<string>) =
     let rightSiblings = match p with
                         | Top(_) -> []
                         | PathNode(_,_,_,rights) -> rights
     let currentValue = match t with
-                        | TreeNode(value,_) -> value
+                        | Empty -> None
+                        | TreeNode(value,_) -> Some(value)
 
-    match rightSiblings,branch with
-        | _, head::tail when currentValue = head -> appendToTreeZipper <| go_down l <| tail 
-        | [] ,_  ->  insert_right <| TreeNode(branch.Head,[]) <| l
-        | _,_ -> appendToTreeZipper <| go_right l <| branch
+    match currentValue,rightSiblings,branch with
+        | None,_,_ -> insert_down <| branchToTree branch<| l 
+        | Some(x), _, head::tail when x = head -> appendToTreeZipper <| go_down l <| tail 
+        | _, [] ,_  ->  insert_right <| TreeNode(branch.Head,[Tree.Empty]) <| l
+        | _, _,_ -> appendToTreeZipper <| go_right l <| branch
 
-                                   
+let appendToTree t (branch:list<string>) =
+    appendToTreeZipper <| getZipper t <| branch
+        |> root         

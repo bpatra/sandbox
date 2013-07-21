@@ -23,9 +23,12 @@ open System
 
 [<EntryPoint>]
 let main args =
-    let basicTree = TreeNode("a",[ TreeNode("b", [TreeNode("d", []); TreeNode("e", []); TreeNode("f",[])]) ; TreeNode("c", [TreeNode("g", [TreeNode("i",[])]);TreeNode("h",[])])])
-    let myZipper = zipper basicTree
-    let zipp_on_g= myZipper |> go_down |> go_right |> go_down
+     let branch1 = ["a";"b";"c"]
+     let tree1 = appendToTree Tree.Empty branch1
+     let branch2 = ["a";"b";"d"]
+     let tree2 =  appendToTree tree1 branch2
+     let branch3 = ["a";"f"]
+     let final = appendToTree tree2 branch3               
 
-    Console.ReadLine() |> ignore
-    0
+     Console.ReadLine() |> ignore
+     0
