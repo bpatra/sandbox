@@ -3,8 +3,8 @@
 open System
 
 type Tree =
-        |TreeNode of string* Tree list
-        |Empty
+        | TreeNode of string* Tree list
+        | Empty
         member this.GetLabel =
             match this with
             | Empty -> failwith "cannot get the label of an empty tree"
@@ -16,9 +16,9 @@ let rec branchToTree (inputList:list<string>) =
         | head::tail ->  TreeNode (head, [branchToTree tail])
             
 type Path =
-        |Top of string
-        |PathNode of string*Tree list * Path * Tree list
-         member this.GetLabel =
+        | Top of string
+        | PathNode of string*Tree list * Path * Tree list
+        member this.GetLabel =
             match this with
             | Top(lbl) -> lbl
             | PathNode(lbl,_,_,_) ->lbl
@@ -78,15 +78,16 @@ let rec appendToTreeZipper (Loc (t,p) as l) (branch:list<string>) =
     let rightSiblings = match p with
                         | Top(_) -> []
                         | PathNode(_,_,_,rights) -> rights
-    let currentValue = match t with
-                        | Empty -> None
-                        | TreeNode(value,_) -> Some(value)
 
-    match currentValue,rightSiblings,branch with
-        | None,_,_ -> insert_down <| branchToTree branch<| l 
-        | Some(x), _, head::tail when x = head -> appendToTreeZipper <| go_down l <| tail 
-        | _, [] ,_  ->  insert_right <| TreeNode(branch.Head,[Tree.Empty]) <| l
-        | _, _,_ -> appendToTreeZipper <| go_right l <| branch
+    let label = match t with
+                        | Empty -> None
+                        | TreeNode(lbl,_) -> Some(lbl)
+
+    match label,rightSiblings,branch with
+        | None,_,_ -> insert_down <| branchToTree branch<| l //empty tree in the zipper, just build a basic tree with zipper with the current branch
+        | Some(x), _, head::tail when x = head -> appendToTreeZipper <| go_down l <| tail //the current tree label and the head of the branch match -> then go deeper
+        | _, [] ,_  ->  insert_right <| TreeNode(branch.Head,[Tree.Empty]) <| l //if the label and the head does not match and there is no right simblings then we have to insert node here.
+        | _, _ ,_ -> appendToTreeZipper <| go_right l <| branch //Remaining case: try to find a match with the right most simbling.
 
 let appendToTree t (branch:list<string>) =
     appendToTreeZipper <| getZipper t <| branch
