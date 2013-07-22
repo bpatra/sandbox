@@ -69,10 +69,7 @@ let rec root (Loc (t, p) as l) =
         | Top(_) -> t
         | _ -> root (go_up l) 
 
-let getZipper t = 
-    match t with
-        | Empty -> Loc(Empty, Top(""))
-        | TreeNode(value,_ )-> Loc(t, Top(value))
+
 
 let rec appendToTreeZipper (Loc (t,p) as l) (branch:list<string>) =
     let rightSiblings = match p with
@@ -88,6 +85,11 @@ let rec appendToTreeZipper (Loc (t,p) as l) (branch:list<string>) =
         | Some(x), _, head::tail when x = head -> appendToTreeZipper <| go_down l <| tail //the current tree label and the head of the branch match -> then go deeper
         | _, [] ,_  ->  insert_right <| TreeNode(branch.Head,[Tree.Empty]) <| l //if the label and the head does not match and there is no right simblings then we have to insert node here.
         | _, _ ,_ -> appendToTreeZipper <| go_right l <| branch //Remaining case: try to find a match with the right most simbling.
+
+let getZipper t = 
+    match t with
+        | Empty -> Loc(Empty, Top(""))
+        | TreeNode(value,_ )-> Loc(t, Top(value))
 
 let appendToTree t (branch:list<string>) =
     appendToTreeZipper <| getZipper t <| branch

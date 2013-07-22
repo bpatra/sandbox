@@ -14,6 +14,7 @@ let rec branchToTree (inputList:list<string>) =
 //branch cannot be empty list
 let rec mergeInto (tree:Tree ref) (branch:list<string>) =
     match !tree,branch with
+        | Empty,_ -> tree := branchToTree branch
         | Node (value,_), head::tail when value <> head -> failwith "Oops invariant loop broken"
         | Node (value,_), [_] -> ignore() //the branch is singleton and by loop invariant its head is the current Tree node -> nothing to do.
         | Node (value,children), _ -> 
@@ -27,4 +28,4 @@ let rec mergeInto (tree:Tree ref) (branch:list<string>) =
                                 match targetChild with
                                     |Some x -> mergeInto x branch.Tail //a valid child match then go deeper. NB: branch.Tail cannot be empty here
                                     |None -> tree := Node(value, (ref (Node (nextBranchValue,[]))) :: children)//attach the next branch value to the children
-        | Empty,_ -> tree := branchToTree branch
+        
