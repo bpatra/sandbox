@@ -24,9 +24,23 @@ namespace InteropTest
             }
         }
 
+        public static void SelectEvenLines(int count)
+        {
+            var watch = new Stopwatch();
+            watch.Start();
+            using (var file = File.CreateText(@"C:\resultEvenLines.csv"))
+            {
+                Range range = null;
+                for (int i = 1; i < 2 * count; i += 2)
+                {
+                    range = Union(i, range, file, watch);
+                }
+            }
+        }
+
         private static Range Union(int i, Range range, StreamWriter file, Stopwatch watch)
         {
-            var currentLine = ExcelAddIn.ActiveSheet.Range["A" + i + ":" + "J" + i];
+            var currentLine = GetRange(i);
             if (range == null)
             {
                 range = currentLine;
@@ -40,24 +54,43 @@ namespace InteropTest
             return range;
         }
 
-        public static void SelectEvenLines(int count)
+
+        public static void SelectEvenLinesFast(int count)
         {
-            var watch = new Stopwatch();
-            watch.Start();
-            using (var file = File.CreateText(@"C:\resultEvenLines.csv"))
+            
+            using (var file = File.CreateText(@"C:\resultEvenLinesFast.csv"))
             {
-                Range range = null;
-                for (int i = 1; i < 2*count; i+=2)
+                for (int i = 1; i < count; i += 10)
                 {
-                    range = Union(i, range, file, watch);
+                    int[] rows = Enumerable.Range(1, i).Where(k => k%2 == 1).ToArray();
+                    var watch = Stopwatch.StartNew();
+                    UnionDivideAndConquer(rows, 0, rows.Length - 1);
+
+                    file.WriteLine("{0};{1}", rows.Length, watch.Elapsed.TotalMilliseconds);
+                    Log.Trace("{0};{1}", rows.Length, watch.Elapsed.TotalMilliseconds);
                 }
             }
         }
 
-
-        public static void SelectEvenLinesDivideAndConquer(int count)
+        public static Range GetRange(int i)
         {
-            
+            return ExcelAddIn.ActiveSheet.Range["A" + i + ":" + "J" + i];
+        }
+
+      
+
+        private static Range UnionDivideAndConquer(int[] excelRows, int start, int end)
+        {
+            if (excelRows.Length == 0) return null;
+            if (start == end)
+            {
+                return GetRange(excelRows[start]);
+            }
+            int middle = (start + end) / 2;
+            Range fastRangeLeft = UnionDivideAndConquer(excelRows, start, middle);
+            Range fastRangeRight = UnionDivideAndConquer(excelRows, middle + 1, end);
+
+            return ExcelAddIn.Excel.Union(fastRangeLeft, fastRangeRight);
         }
     }
 }
