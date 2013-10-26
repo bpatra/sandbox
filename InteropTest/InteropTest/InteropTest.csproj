@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="ExcelAddIn.cs" />
     <Compile Include="Log.cs" />
+    <Compile Include="SelectLines.cs" />
     <Compile Include="VersionManagement\AssemblyInfo.cs" />
     <Compile Include="VersionManagement\AssemblyLinkedProductAttribute.cs" />
     <None Include="InteropTest64AddIn.dna">

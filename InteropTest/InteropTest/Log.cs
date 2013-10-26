@@ -3,15 +3,13 @@ using System.IO;
 using System.Runtime.InteropServices;
 using log4net;
 
-namespace PowerMerger
+namespace InteropTest
 {
     public static class Log
     {
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool AllocConsole();
-        [DllImport("kernel32.dll", SetLastError = true)]
-        private static extern bool FreeConsole();
 
         public static string FilePath
         {
@@ -97,8 +95,8 @@ namespace PowerMerger
 
         public static void Trace( String traceMessage, params object[] arg)
         {
-            //traceMessage = PrepareMessage("[TRACE]", traceMessage, arg);
-            //_logger.Info(traceMessage);
+            traceMessage = PrepareMessage("[TRACE]", traceMessage, arg);
+            _logger.Info(traceMessage);
         }
 
         public static void Debug(String method, String traceMessage, params object[] arg)

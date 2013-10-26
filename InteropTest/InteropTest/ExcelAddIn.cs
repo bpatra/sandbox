@@ -18,6 +18,7 @@ using DialogResult = System.Windows.Forms.DialogResult;
 using System.Runtime.CompilerServices;
 using FrontExcelAddIn.VersionManagement;
 using System.Text;
+using InteropTest;
 ///////////////////////////////////////////
 //ADDIN LOADING PROBLEMS SOLUTION ROADMAP//
 ///////////////////////////////////////////
@@ -26,7 +27,7 @@ using System.Text;
 //c) Make sure that the "[ComVisible(true)]" is present for the Ribbon method, and the Forms Panes Methods
 //d) Check if [DebuggerNonUserCode] are not misplaced
 
-namespace PowerMerger
+namespace InteropTest
 {
 
     public class ExcelAddIn
@@ -41,10 +42,11 @@ namespace PowerMerger
         }
 
     
+        //Command must be non nested...
         [ExcelCommand]
-        public static void SelectEvenLines()
+        public static void SelectLines()
         {
-           Console.WriteLine("Hello");
+            InteropTest.SelectLines.SelectEvenLines(40000);
         }
 
 
