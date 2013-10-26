@@ -1,0 +1,3 @@
+<DnaLibrary Name="InteropTest Add-in" Language="C#" RuntimeVersion="v4.0">
+  <ExternalLibrary Path="InteropTest.dna" Pack="true"/>
+</DnaLibrary>

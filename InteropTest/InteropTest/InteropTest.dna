@@ -1,0 +1,7 @@
+﻿<DnaLibrary Name="InteropTest Add-in">
+
+  <!--Libraries-->
+
+  <ExternalLibrary Path="InteropTest.dll" Pack="true" ExplicitExports="true"/>
+  
+</DnaLibrary>
